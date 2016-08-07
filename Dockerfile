@@ -14,14 +14,14 @@ RUN apt-get update && \
 
 # Grab sources, need latest version for HTML5
 WORKDIR /usr/src
-RUN svn co https://www.xpra.org/svn/Xpra/
+RUN svn co -r r7939 https://www.xpra.org/svn/Xpra/
 
 # Build from sources
 RUN cd Xpra/trunk/src && \
     python ./setup.py --without-csc_swscale install && \
     cd rencode && \
     python ./setup.py install && \
-    curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | sudo python
+    curl https://bootstrap.pypa.io/ez_setup.py | sudo python
 
 # Get our "demo" executable
 RUN apt-get -y install firefox
