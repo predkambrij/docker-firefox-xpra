@@ -17,7 +17,7 @@ To run this image, pull the repository and run the image:
 
 ```bash
 docker pull yadutaf/firefox.js
-docker run -t --rm -p 8080:8080 yadutaf/firefox
+docker run -it --rm -p 8080:8080 -p 10000:10000 yadutaf/firefox
 ```
 
 Alternatively, you may rebuild the image from sources:
@@ -26,14 +26,14 @@ Alternatively, you may rebuild the image from sources:
 git clone https://github.com/yadutaf/docker-firefox-xpra.git
 cd docker-firefox-xpra
 docker build -t firefox .
-docker run -t --rm -p 8080:8080 p 10000:10000 firefox
+docker run -t --rm -p 8080:8080 -p 10000:10000 firefox
 ```
 
 Then either visit http://localhost:8080/ or install xpra and use it:
 
 ```bash
 # Install
-echo "deb http://www.xpra.org/dists $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
+echo "deb https://www.xpra.org $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list # (in my case $(lsb_release -cs) = trusty)
 curl https://www.xpra.org/gpg.asc | sudo apt-key add -
 sudo apt-get update && apt-get install xpra
 
